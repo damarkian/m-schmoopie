@@ -4,6 +4,7 @@ spec:
     parent: generic-task
     inputs:
       parameters:
+      - name: rawgeometry
       - name: command
         value: python3 main.py
       artifacts:
@@ -19,7 +20,9 @@ spec:
             from schmoopie.qmolecule import make_geometry, create_molecule
  
             description = "h2"
-            geometry = make_geometry()
+            rawgeometry = '{{inputs.parameters.rawgeometry}}'
+            listgeometry = rawgeometry.strip('][').split(', ') 
+            geometry = listgeometry
             basis = 'sto-3g'
             charge = 0
             multiplicity = 1

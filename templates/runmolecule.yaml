@@ -16,7 +16,7 @@ spec:
             import json
             from openfermion.hamiltonians import MolecularData
             from openfermionpsi4 import run_psi4
-            from schmoopie.qmolecule import make_geometry
+            from schmoopie.qmolecule import make_geometry, create_molecule
  
             description = "h2"
             geometry = make_geometry()
@@ -32,7 +32,8 @@ spec:
             molecule.save()
             
             opd = {}
-            opd["energy"] = str(molecule.hf_energy)
+            opd["hfenergy"] = str(molecule.hf_energy)
+            opd["mp2energy"] = str(molecule.mp2_energy)
             opd["schema"] = "schmoopie-result"
             with open('/app/results.json', 'w') as f:
               f.write(json.dumps(opd))

@@ -5,6 +5,7 @@ spec:
     inputs:
       parameters:
       - name: rawgeometry
+      - name: basisset
       - name: command
         value: python3 main.py
       artifacts:
@@ -21,15 +22,14 @@ spec:
  
             description = "h2"
             rawgeometry = "{{inputs.parameters.rawgeometry}}"
-            listgeometry = eval(rawgeometry) 
-            geometry = listgeometry
-            basis = 'sto-3g'
+            geometry = eval(rawgeometry)
+            basisset = '{{inputs.parameters.basisset}}'
             charge = 0
             multiplicity = 1
 
             filename = '/app/moleculedata.hdf5'
 
-            molecule = MolecularData(geometry, basis, multiplicity, charge, description, filename=filename)
+            molecule = MolecularData(geometry, basisset, multiplicity, charge, description, filename=filename)
     
             molecule = run_psi4(molecule, run_scf=1, run_mp2=1, run_cisd=0, run_ccsd=0, run_fci=0, verbose=1, tolerate_error=1)
             molecule.save()

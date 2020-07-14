@@ -30,10 +30,10 @@ spec:
 
             create_molecule(geometry, basisset, multiplicity, charge, description, filename)
 
-            h5f = h5py.File('/app/moleculedata.hdf5', 'r')
-
-            ehf = h5f['hf_energy']
-            emp2 = h5f['mp2_energy']
+            
+            with h5py.File('/app/moleculedata.hdf5') as h5f:
+              ehf = h5f['hf_energy']
+              emp2 = h5f['mp2_energy']
           
             opd = {}
             opd["properties"] = str(list(h5f.keys()))

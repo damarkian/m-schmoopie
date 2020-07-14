@@ -64,11 +64,13 @@ spec:
   templates:
   - name: run-h2
     steps: 
-
     - - name: create-molecule
         template: run-molecule
         arguments: 
           parameters:
+          - rawgeometry: "[['H', [0.0, 0.0, 0.0]], 
+                           ['H', [0.0, 0.0, 0.8]]]"
+          - basisset: '6-31g'
           - resources: [m-schmoopie, z-quantum-core, qe-openfermion, qe-psi4, openfermion, openfermionpsi4]
           - docker-image: qe-psi4
           - docker-tag: latest

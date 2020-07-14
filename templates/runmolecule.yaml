@@ -33,13 +33,12 @@ spec:
             molecule = run_psi4(molecule, run_scf=1, run_mp2=1, run_cisd=0, run_ccsd=0, run_fci=0, verbose=1, tolerate_error=1)
             molecule.save()
 
-            f = h5py.File('/app/moleculedata.hdf5', 'r')
-
-            
+            h5f = h5py.File('/app/moleculedata.hdf5', 'r')
+          
             opd = {}
             opd["hfenergy"] = str(molecule.hf_energy)
             opd["mp2energy"] = str(molecule.mp2_energy)
-            opd["properties"] = str(list(f.keys()))
+            opd["properties"] = str(list(h5f.keys()))
             opd["schema"] = "schmoopie-result"
             with open('/app/results.json', 'w') as f:
               f.write(json.dumps(opd))

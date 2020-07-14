@@ -18,7 +18,7 @@ spec:
             import json
             from openfermion.hamiltonians import MolecularData
             from openfermionpsi4 import run_psi4
-            from schmoopie.qmolecule import make_geometry, create_molecule
+            from schmoopie.qmolecule import create_molecule
  
             description = "h2"
             rawgeometry = "{{inputs.parameters.rawgeometry}}"
@@ -26,18 +26,13 @@ spec:
             basisset = '{{inputs.parameters.basisset}}'
             charge = 0
             multiplicity = 1
-
             filename = '/app/moleculedata.hdf5'
 
-            molecule = MolecularData(geometry, basisset, multiplicity, charge, description, filename=filename)    
-            molecule = run_psi4(molecule, run_scf=1, run_mp2=1, run_cisd=0, run_ccsd=0, run_fci=0, verbose=1, tolerate_error=1)
-            molecule.save()
+            create_molecule(geometry, basisset, multiplicity, charge, description, filename)
 
             h5f = h5py.File('/app/moleculedata.hdf5', 'r')
           
             opd = {}
-            opd["hfenergy"] = str(molecule.hf_energy)
-            opd["mp2energy"] = str(molecule.mp2_energy)
             opd["properties"] = str(list(h5f.keys()))
             opd["schema"] = "schmoopie-result"
             with open('/app/results.json', 'w') as f:

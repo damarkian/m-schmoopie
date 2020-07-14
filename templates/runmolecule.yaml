@@ -21,7 +21,7 @@ spec:
  
             description = "h2"
             rawgeometry = "{{inputs.parameters.rawgeom}}"
-            listgeometry = rawgeometry.strip('][').split(', ') 
+            listgeometry = eval(rawgeometry) 
             geometry = listgeometry
             basis = 'sto-3g'
             charge = 0

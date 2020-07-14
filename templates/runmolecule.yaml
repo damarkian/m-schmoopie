@@ -18,6 +18,7 @@ spec:
             from openfermionpsi4 import run_psi4
             from schmoopie.qmolecule import make_geometry
  
+            description = "h2"
             geometry = make_geometry()
             basis = 'sto-3g'
             charge = 0

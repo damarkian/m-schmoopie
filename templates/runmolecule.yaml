@@ -36,15 +36,17 @@ spec:
               ehf = h5f['hf_energy']
               emp2 = h5f['mp2_energy']
           
-            with open("/app/moleculedata.hdf5", "rb") as hfile:
-              encoded_string = base64.b64encode(hfile.read())
-
             opd = {}
+            opd["schema"] = "schmoopie-result"
             # opd["properties"] = str(list(h5f.keys()))
             opd["hfenergy"] = str(ehf)
             opd["mp2energy"] = str(emp2)
-            # opd["h5b64"] = str(encoded_string)
-            opd["schema"] = "schmoopie-result"
+
+            with open("/app/moleculedata.hdf5", "rb") as hfile:
+              encoded_string = base64.b64encode(hfile.read())
+
+            opd["h5b64"] = str(encoded_string)
+            
             with open('/app/results.json', 'w') as f:
               f.write(json.dumps(opd))
     

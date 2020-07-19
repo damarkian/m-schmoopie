@@ -43,7 +43,7 @@ spec:
             # opd["properties"] = str(list(h5f.keys()))
             opd["hfenergy"] = str(ehf)
             opd["mp2energy"] = str(emp2)
-            opd["h5b64"] = str(encoded_string)
+            opd["h5b64"] = encoded_string
             opd["schema"] = "schmoopie-result"
             with open('/app/results.json', 'w') as f:
               f.write(json.dumps(opd))

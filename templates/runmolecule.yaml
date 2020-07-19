@@ -45,7 +45,7 @@ spec:
             with open("/app/moleculedata.hdf5", "rb") as hfile:
               encoded_string = base64.b64encode(hfile.read())
 
-            opd["h5b64"] = str(encoded_string)
+            opd["h5b64"] = str(encoded_string, "utf-8")
             
             with open('/app/results.json', 'w') as f:
               f.write(json.dumps(opd))

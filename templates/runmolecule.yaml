@@ -40,7 +40,7 @@ spec:
               encoded_string = base64.b64encode(hfile.read())
 
             opd = {}
-            opd["properties"] = str(list(h5f.keys()))
+            # opd["properties"] = str(list(h5f.keys()))
             opd["hfenergy"] = str(ehf)
             opd["mp2energy"] = str(emp2)
             opd["h5b64"] = str(encoded_string)

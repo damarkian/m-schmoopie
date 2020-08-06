@@ -21,7 +21,7 @@ spec:
             from openfermionpsi4 import run_psi4
             from schmoopie.qmolecule import create_molecule
  
-            description = "h2"
+            description = "runmolecule"
             rawgeometry = "{{inputs.parameters.rawgeometry}}"
             geometry = eval(rawgeometry)
             basisset = '{{inputs.parameters.basisset}}'
@@ -30,7 +30,6 @@ spec:
             filename = '/app/moleculedata.hdf5'
 
             create_molecule(geometry, basisset, multiplicity, charge, description, filename)
-
             
             # with h5py.File('/app/moleculedata.hdf5') as h5f:
             #  ehf = h5f['hf_energy']
@@ -38,14 +37,14 @@ spec:
           
             opd = {}
             opd["schema"] = "schmoopie-result"
-            # opd["properties"] = str(list(h5f.keys()))
-            # opd["hfenergy"] = str(ehf)
-            # opd["mp2energy"] = str(emp2)
+            opd["properties"] = str(list(h5f.keys()))
+            opd["hfenergy"] = str(ehf)
+            opd["mp2energy"] = str(emp2)
 
-            with open("/app/moleculedata.hdf5", "rb") as hfile:
-              encoded_string = base64.b64encode(hfile.read())
+            # with open("/app/moleculedata.hdf5", "rb") as hfile:
+            #   encoded_string = base64.b64encode(hfile.read())
 
-            opd["h5b64"] = str(encoded_string, "utf-8")
+            # opd["h5b64"] = str(encoded_string, "utf-8")
             
             with open('/app/results.json', 'w') as f:
               f.write(json.dumps(opd))

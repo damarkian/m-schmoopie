@@ -68,8 +68,12 @@ spec:
         template: run-molecule
         arguments: 
           parameters:
-          - rawgeometry: "[['H', [0.0, 0.0, 0.0]], 
-                           ['H', [0.0, 0.0, 0.8]]]"
+          - rawgeometry: "[['C', [0.0000, 0.0000, 0.0000]], 
+                           ['H', [0.6253, 0.6253, 0.6253]],
+                           ['H', [-0.6253, -0.6253, 0.6253]],
+                           ['H', [-0.6253, 0.6253, -0.6253]],
+                           ['H', [0.6253, -0.6253, -0.6253]],
+                           ]"
           - basisset: '6-31g'
           - resources: [m-schmoopie, z-quantum-core, qe-openfermion, qe-psi4, openfermion, openfermionpsi4]
           - docker-image: qe-psi4

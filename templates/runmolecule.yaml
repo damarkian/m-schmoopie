@@ -31,9 +31,9 @@ spec:
 
             create_molecule(geometry, basisset, multiplicity, charge, description, filename)
             
-            with h5py.File('/app/moleculedata.hdf5') as h5f:
-              ehf = h5f['hf_energy']
-              emp2 = h5f['mp2_energy']
+            h5f = h5py.File('/app/moleculedata.hdf5', 'r') 
+            ehf = h5f['hf_energy']
+            emp2 = h5f['mp2_energy']
           
             opd = {}
             opd["schema"] = "schmoopie-result"
@@ -46,6 +46,8 @@ spec:
 
             # opd["h5b64"] = str(encoded_string, "utf-8")
             
+            h5f.close()
+
             with open('/app/results.json', 'w') as f:
               f.write(json.dumps(opd))
     
